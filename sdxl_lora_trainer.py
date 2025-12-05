@@ -100,7 +100,20 @@ def _compute_image_hash(images, captions, training_steps, learning_rate, lora_ra
 
 
 def _get_venv_python_path(sd_scripts_path):
-    """Get the Python path for sd-scripts venv based on platform."""
+    """Get the Python path for sd-scripts venv based on platform.
+    Checks both .venv (uv default) and venv (traditional) folders."""
+    venv_folders = [".venv", "venv"]
+
+    for venv_folder in venv_folders:
+        if sys.platform == 'win32':
+            python_path = os.path.join(sd_scripts_path, venv_folder, "Scripts", "python.exe")
+        else:
+            python_path = os.path.join(sd_scripts_path, venv_folder, "bin", "python")
+
+        if os.path.exists(python_path):
+            return python_path
+
+    # Return traditional path for error messaging
     if sys.platform == 'win32':
         return os.path.join(sd_scripts_path, "venv", "Scripts", "python.exe")
     else:
@@ -108,7 +121,20 @@ def _get_venv_python_path(sd_scripts_path):
 
 
 def _get_accelerate_path(sd_scripts_path):
-    """Get the accelerate path for sd-scripts venv based on platform."""
+    """Get the accelerate path for sd-scripts venv based on platform.
+    Checks both .venv (uv default) and venv (traditional) folders."""
+    venv_folders = [".venv", "venv"]
+
+    for venv_folder in venv_folders:
+        if sys.platform == 'win32':
+            accel_path = os.path.join(sd_scripts_path, venv_folder, "Scripts", "accelerate.exe")
+        else:
+            accel_path = os.path.join(sd_scripts_path, venv_folder, "bin", "accelerate")
+
+        if os.path.exists(accel_path):
+            return accel_path
+
+    # Return traditional path for error messaging
     if sys.platform == 'win32':
         return os.path.join(sd_scripts_path, "venv", "Scripts", "accelerate.exe")
     else:

@@ -28,11 +28,25 @@ from .config_template import generate_training_config, save_config, generate_uni
 def _get_venv_python_path(ai_toolkit_path: str) -> str:
     """
     Get the correct Python executable path for the AI-Toolkit venv,
-    handling cross-platform differences.
+    handling cross-platform differences and different venv folder names.
 
-    Windows: venv/Scripts/python.exe
-    Linux/Mac: venv/bin/python
+    Checks both .venv (uv default) and venv (traditional) folders.
+    Windows: .venv/Scripts/python.exe or venv/Scripts/python.exe
+    Linux/Mac: .venv/bin/python or venv/bin/python
     """
+    # Check both .venv (uv) and venv (traditional) folders
+    venv_folders = [".venv", "venv"]
+
+    for venv_folder in venv_folders:
+        if sys.platform == 'win32':
+            python_path = os.path.join(ai_toolkit_path, venv_folder, "Scripts", "python.exe")
+        else:
+            python_path = os.path.join(ai_toolkit_path, venv_folder, "bin", "python")
+
+        if os.path.exists(python_path):
+            return python_path
+
+    # Return the traditional path for error messaging (will fail with helpful error later)
     if sys.platform == 'win32':
         return os.path.join(ai_toolkit_path, "venv", "Scripts", "python.exe")
     else:
@@ -341,7 +355,7 @@ class RealtimeLoraTrainer:
         run_script = os.path.join(ai_toolkit_path, "run.py")
 
         if not os.path.exists(venv_python):
-            raise FileNotFoundError(f"AI-Toolkit venv not found at: {venv_python}")
+            raise FileNotFoundError(f"AI-Toolkit venv not found. Checked .venv and venv folders in: {ai_toolkit_path}")
         if not os.path.exists(run_script):
             raise FileNotFoundError(f"AI-Toolkit run.py not found at: {run_script}")
 
