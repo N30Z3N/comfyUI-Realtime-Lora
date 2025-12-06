@@ -17,6 +17,7 @@ If this node saves you time or helps your workflow, consider [buying me a coffee
 
 **Via Kohya sd-scripts:**
 - SDXL (any checkpoint) - tested with Juggernaut XL Ragnarok, base SDXL will work too
+- SD 1.5 (any checkpoint)
 
 **Via AI-Toolkit:**
 - Z-Image Turbo
@@ -33,7 +34,7 @@ If this node saves you time or helps your workflow, consider [buying me a coffee
 
 You need to install the training backend(s) separately:
 
-**For SDXL training:**
+**For SDXL / SD 1.5 training:**
 1. Install sd-scripts: https://github.com/kohya-ss/sd-scripts
 2. Follow their install instructions
 3. Run `accelerate config` in the venv (just press Enter to accept defaults for each question)
@@ -63,6 +64,7 @@ Search for these in ComfyUI:
 
 - **Realtime LoRA Trainer** - Trains using AI-Toolkit (FLUX, Z-Image, Wan)
 - **Realtime LoRA Trainer (SDXL - sd-scripts)** - Trains using sd-scripts (SDXL)
+- **Realtime LoRA Trainer (SD 1.5 - sd-scripts)** - Trains using sd-scripts (SD 1.5)
 - **Apply Trained LoRA** - Applies the trained LoRA to your model
 
 ## Getting Started
@@ -122,7 +124,7 @@ Peter Neill - [ShootTheSound.com](https://shootthesound.com) / [UltrawideWallpap
 
 Background in music industry photography and video. Built this node to make LoRA training accessible to creators who just want to get things done without diving into command line tools.
 
-Feedback is welcome - open an issue or reach out. There's a roadmap for future development including SD 1.5 support, an export/import presets system, and more.
+Feedback is welcome - open an issue or reach out. There's a roadmap for future development including an export/import presets system and more.
 
 ## License
 
