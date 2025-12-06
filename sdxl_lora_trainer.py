@@ -39,7 +39,7 @@ def _load_sdxl_config():
     global _sdxl_config
     if os.path.exists(_sdxl_config_file):
         try:
-            with open(_sdxl_config_file, 'r') as f:
+            with open(_sdxl_config_file, 'r', encoding='utf-8') as f:
                 _sdxl_config = json.load(f)
         except:
             _sdxl_config = {}
@@ -48,7 +48,7 @@ def _load_sdxl_config():
 def _save_sdxl_config():
     """Save SDXL config to disk."""
     try:
-        with open(_sdxl_config_file, 'w') as f:
+        with open(_sdxl_config_file, 'w', encoding='utf-8') as f:
             json.dump(_sdxl_config, f, indent=2)
     except:
         pass
@@ -59,7 +59,7 @@ def _load_sdxl_cache():
     global _sdxl_lora_cache
     if os.path.exists(_sdxl_cache_file):
         try:
-            with open(_sdxl_cache_file, 'r') as f:
+            with open(_sdxl_cache_file, 'r', encoding='utf-8') as f:
                 _sdxl_lora_cache = json.load(f)
         except:
             _sdxl_lora_cache = {}
@@ -68,7 +68,7 @@ def _load_sdxl_cache():
 def _save_sdxl_cache():
     """Save SDXL LoRA cache to disk."""
     try:
-        with open(_sdxl_cache_file, 'w') as f:
+        with open(_sdxl_cache_file, 'w', encoding='utf-8') as f:
             json.dump(_sdxl_lora_cache, f)
     except:
         pass

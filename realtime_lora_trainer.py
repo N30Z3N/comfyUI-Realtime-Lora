@@ -68,7 +68,7 @@ def _load_cache():
     global _lora_cache
     if os.path.exists(_cache_file):
         try:
-            with open(_cache_file, 'r') as f:
+            with open(_cache_file, 'r', encoding='utf-8') as f:
                 _lora_cache = json.load(f)
         except:
             _lora_cache = {}
@@ -77,7 +77,7 @@ def _load_cache():
 def _save_cache():
     """Save cache to disk."""
     try:
-        with open(_cache_file, 'w') as f:
+        with open(_cache_file, 'w', encoding='utf-8') as f:
             json.dump(_lora_cache, f)
     except:
         pass
@@ -88,7 +88,7 @@ def _load_config():
     global _config
     if os.path.exists(_config_file):
         try:
-            with open(_config_file, 'r') as f:
+            with open(_config_file, 'r', encoding='utf-8') as f:
                 _config = json.load(f)
         except:
             _config = {}
@@ -97,7 +97,7 @@ def _load_config():
 def _save_config():
     """Save config to disk."""
     try:
-        with open(_config_file, 'w') as f:
+        with open(_config_file, 'w', encoding='utf-8') as f:
             json.dump(_config, f, indent=2)
     except:
         pass
